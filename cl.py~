@@ -61,7 +61,7 @@ class a(object):
 
     def emfanisei_sugekrimenou_mhna_gia_ola_eth(self,*col)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia ola ta eth':
      
-        new = pd.DataFrame(self.eisodhmata.loc[:, [i for i in col]].sum(), columns={'Atrhoisma eisodhmatwn olwn twn etwn'})
+        new = pd.DataFrame(self.eisodhmata.loc[:, [i for i in col]].sum(), columns={'athroisma'})
         print(new)
         
         
