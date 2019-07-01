@@ -7,17 +7,18 @@ months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augus
 
 class a(object):
 
-    def __init__(self,xronia:int):
-        self.xronia = xronia
-        self.eisodhmata = pd.DataFrame(self.eisodhmata_gen(), columns = [*months])
+    def __init__(self,years:int):
+       
+        self.years = years
+        self.incomes = pd.DataFrame(self.incomes_gen(), columns = [*months])
 
     
-    def eisodhmata_gen(self):
+    def incomes_gen(self):
       
-        for _ in range(0,self.xronia):
-            yield from self.ethsio_eisodhma()
+        for _ in range(0,self.years):
+            yield from self.annual_income()
 
-    def ethsio_eisodhma(self): 
+    def annual_income(self): 
 
          lista = [] 
          for i in range(1,13):
@@ -30,16 +31,16 @@ class a(object):
 
 
 
-    def sunolika_ethsia_eisodhmata(self)-> 'emfanizei ta ethsia eisodhmata':
+    def annual_total_incomes(self)-> 'emfanizei ta ethsia eisodhmata':
       
-        p = pd.DataFrame(self.eisodhmata.sum(axis=1),columns=['ethsio eisodhma'])
+        p = pd.DataFrame(self.incomes.sum(axis=1),columns=['ethsio eisodhma'])
         print(p)
 
 
 
-    def sugrisei_ethsiwn_eisodhmatwn(self,year_first:int,year_second:int)-> 'sugrinei ta sunolika eisodhmata duo sugekrimenwn etwn':
+    def compares_annnual_incomes(self,year_first:int,year_second:int)-> 'sugrinei ta sunolika eisodhmata duo sugekrimenwn etwn':
         
-        difference =  self.eisodhmata.iloc[year_first].sum() - self.eisodhmata.iloc[year_second].sum()
+        difference =  self.incomes.iloc[year_first].sum() - self.incomes.iloc[year_second].sum()
         if difference < 0:
             print(f'{year_second} more {difference}')
         elif difference > 0:
@@ -48,29 +49,29 @@ class a(object):
             print('equal') 
 
 
-    def minhaia_eisodhmata(self)-> 'emfanizei ta athroistika eisodhmata olwn twn mhnwn gia ola ta eth':
+    def monthly_total_incomes_for_each_month(self)-> 'emfanizei ta athroistika eisodhmata olwn twn mhnwn gia ola ta eth':
 
-       a = pd.DataFrame(self.eisodhmata.sum(), columns=['athroisthko eisodhma kathe mhna gia ola ta eth'])
+       a = pd.DataFrame(self.incomes.sum(), columns=['athroisthko eisodhma kathe mhna gia ola ta eth'])
        print(a)
 
 
 
-    def emfanisei_sugekrimenou_mhna_gia_ena_etos(self,etos:int,mhnas:str)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia sugekrimeno etos':
-        print(self.eisodhmata.at[etos,mhnas])
+    def specific_month_income_for_specifc_year(self,year:int,month:str)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia sugekrimeno etos':
+        print(self.incomes.at[year,month])
 
 
-    def emfanisei_sugekrimenou_mhna_gia_ola_eth(self,*col)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia ola ta eth':
+    def month_total_income_for_all_year(self,*col)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia ola ta eth':
      
-        new = pd.DataFrame(self.eisodhmata.loc[:, [i for i in col]].sum(), columns={'Atrhoisma eisodhmatwn olwn twn etwn'})
+        new = pd.DataFrame(self.incomes.loc[:, [i for i in col]].sum(), columns={'Atrhoisma eisodhmatwn olwn twn etwn'})
         print(new)
         
         
 
 
 
-    def sugrisei_mhnwn(self,year_first:int,month_first:str,year_second:int,month_second:str)-> 'sugrinei sugekrimena eisodhmata 2 mhnwn':
+    def compare_incomes_two_specific_months(self,year_first:int,month_first:str,year_second:int,month_second:str)-> 'sugrinei sugekrimena eisodhmata 2 mhnwn':
        
-        difference =  self.eisodhmata.at[year_first,month_first] - self.eisodhmata.at[year_second,month_second]
+        difference =  self.incomes.at[year_first,month_first] - self.incomes.at[year_second,month_second]
        
         if difference < 0:
             print(f'{year_second}:{month_second} more {difference}')
@@ -81,20 +82,20 @@ class a(object):
 
 
 
-    def emfanisei_sugekrimenwn_mhnwn_etwn(self,*columns_raws:tuple)-> 'emfanizei eisodhmata sugekrimenwn mhnwn gia sugekrimena eth':
+    def incomes_specific_mothns_speific_years(self,*columns_raws:tuple)-> 'emfanizei eisodhmata sugekrimenwn mhnwn gia sugekrimena eth':
       
-        print(self.eisodhmata.loc[[i for i in columns_raws[0]], [i for i in columns_raws[1]]])
+        print(self.incomes.loc[[i for i in columns_raws[0]], [i for i in columns_raws[1]]])
         
        
        
     
     def gr(self):
-        a = self.eisodhmata.cumsum()
+        a = self.incomes.cumsum()
         plt.figure()
         a.plot()
 
     def plot_etos(self,etos):
-        ts = self.eisodhmata.iloc[etos]
+        ts = self.incomes.iloc[etos]
         
         ts.plot()
 
