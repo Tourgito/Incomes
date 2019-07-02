@@ -5,19 +5,22 @@ plt.close('all')
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+
 class a(object):
 
     def __init__(self,years:int):
-        self.years = years
-        self.incomes = pd.DataFrame(self.incomes_gen(), columns = [*months])
+       
+        self.years = [i+1 for i in range(0,years)]
+        self.incomes = pd.DataFrame(self.w_incomes_gen(), columns = [*months], index=[*self.years])
 
+   
     
-    def incomes_gen(self):
+    def w_incomes_gen(self):
       
-        for _ in range(0,self.years):
-            yield from self.annual_income()
+        for _ in self.years:
+            yield from self.w_annual_income()
 
-    def annual_income(self): 
+    def w_annual_income(self): 
 
          lista = [] 
          for i in range(1,13):
@@ -37,13 +40,14 @@ class a(object):
 
 
 
-    def compares_annnual_incomes(self,year_first:int,year_second:int)-> 'sugrinei ta sunolika eisodhmata duo sugekrimenwn etwn':
+    def compares_annual_incomes(self,year_first:int,year_second:int)-> 'sugrinei ta sunolika eisodhmata duo sugekrimenwn etwn':
         
         difference =  self.incomes.iloc[year_first].sum() - self.incomes.iloc[year_second].sum()
         if difference < 0:
             print(f'{year_second} more {difference}')
         elif difference > 0:
-           print(f'{year_first} more {difference}')
+           difference = abs(difference) 
+           print(f'{year_first} more {difference})')
         else:
             print('equal') 
 
