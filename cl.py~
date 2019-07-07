@@ -47,24 +47,24 @@ class a(object):
             print(f'{year_second} more {difference}')
         elif difference > 0:
            difference = abs(difference) 
-           print(f'{year_first} more {difference})')
+           print(f'{year_first} more {difference}')
         else:
             print('equal') 
 
 
-    def monthly_total_incomes_for_each_month(self)-> 'emfanizei ta athroistika eisodhmata olwn twn mhnwn gia ola ta eth':
+    def monthly_total_incomes_for_each_year(self)-> 'emfanizei ta athroistika eisodhmata olwn twn mhnwn gia ola ta eth':
 
        a = pd.DataFrame(self.incomes.sum(), columns=['athroisthko eisodhma kathe mhna gia ola ta eth'])
        print(a)
 
 
 
-    def specific_month_income_for_specifc_year(self,year:int,month:str)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia sugekrimeno etos':
+    def specific_month_income_for_specific_year(self,year:int,month:str)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia sugekrimeno etos':
         print(self.incomes.at[year,month])
 
 
-    def month_total_income_for_all_year(self,*col)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia ola ta eth':
-     
+    def month_total_income_for_all_year(self,col:list)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia ola ta eth':
+
         new = pd.DataFrame(self.incomes.loc[:, [i for i in col]].sum(), columns={'Atrhoisma eisodhmatwn olwn twn etwn'})
         print(new)
         
@@ -85,9 +85,10 @@ class a(object):
 
 
 
-    def incomes_specific_mothns_speific_years(self,*columns_raws:tuple)-> 'emfanizei eisodhmata sugekrimenwn mhnwn gia sugekrimena eth':
-      
-        print(self.incomes.loc[[i for i in columns_raws[0]], [i for i in columns_raws[1]]])
+    def incomes_specific_months_specific_years(self,raws:list,columns:list)-> 'emfanizei eisodhmata sugekrimenwn mhnwn gia sugekrimena eth':
+        print(columns)
+        print(raws)
+        print(self.incomes.loc[[i for i in raws], [i for i in columns]])
         
        
        
