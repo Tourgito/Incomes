@@ -39,17 +39,16 @@ class a(object):
         print(p)
 
 
-
-    def compares_annual_incomes(self,year_first:int,year_second:int)-> 'sugrinei ta sunolika eisodhmata duo sugekrimenwn etwn':
-        
-        difference =  self.incomes.iloc[year_first].sum() - self.incomes.iloc[year_second].sum()
+    def compares_annual_incomes(self,args:list)-> 'sugrinei ta sunolika eisodhmata duo sugekrimenwn etwn':
+        print(self.incomes.loc[[args[0],args[1]]])
+        difference =  self.incomes.iloc[args[0]].sum() - self.incomes.iloc[args[1]].sum()
         if difference < 0:
-            print(f'{year_second} more {difference}')
+            difference = abs(difference) 
+            print(f'\nThe income of year {args[1]}  is bigger  by {difference}')
         elif difference > 0:
-           difference = abs(difference) 
-           print(f'{year_first} more {difference}')
+           print(f'\nThe income of year {args[1]}  is bigger by {difference}')
         else:
-            print('equal') 
+            print('\nThe incomes of both years are equal') 
 
 
     def monthly_total_incomes_for_each_year(self)-> 'emfanizei ta athroistika eisodhmata olwn twn mhnwn gia ola ta eth':
@@ -59,8 +58,8 @@ class a(object):
 
 
 
-    def specific_month_income_for_specific_year(self,year:int,month:str)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia sugekrimeno etos':
-        print(self.incomes.at[year,month])
+    def specific_month_income_for_specific_year(self,args:list)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia sugekrimeno etos':
+        print(pd.Series(self.incomes.at[args[0],args[1]], index=[args[1]]))
 
 
     def month_total_income_for_all_year(self,col:list)-> 'emfanizei to eisodhma enos sugekrimenou mhna gia ola ta eth':
@@ -72,14 +71,18 @@ class a(object):
 
 
 
-    def compare_incomes_two_specific_months(self,year_first:int,month_first:str,year_second:int,month_second:str)-> 'sugrinei sugekrimena eisodhmata 2 mhnwn':
+    def compare_incomes_two_specific_months(self,args:list)-> 'sugrinei sugekrimena eisodhmata 2 mhnwn':
        
-        difference =  self.incomes.at[year_first,month_first] - self.incomes.at[year_second,month_second]
+        difference =  self.incomes.at[args[0],args[1]] - self.incomes.at[args[2],args[3]]
+        lista = [self.incomes.at[args[0],args[1]],self.incomes.at[args[2],args[3]]]
+        serie = pd.Series(lista, index = [args[1],args[3]])
+        print(f'{serie}\n')
        
         if difference < 0:
-            print(f'{year_second}:{month_second} more {difference}')
+            difference = abs(difference)
+            print(f'{args[2]}:{args[3]} more {difference}')
         elif difference > 0:
-           print(f'{year_first}:{month_first} more {difference}')
+           print(f'{args[0]}:{args[1]} more {difference}')
         else:
             print('equal')
 
@@ -102,4 +105,17 @@ class a(object):
         
         ts.plot()
 
-        
+    def class_methods(self):
+        lista = {
+                'incomes_specific_months_specific_years' : self.incomes_specific_months_specific_years,
+                'annual_total_incomes': self.annual_total_incomes,
+                'compare_incomes_two_specific_months' : self.compare_incomes_two_specific_months ,
+
+                'month_total_income_for_all_year' : self.month_total_income_for_all_year,
+
+                'specific_month_income_for_specific_year' : self.specific_month_income_for_specific_year,
+                'compares_annual_incomes' : self.compares_annual_incomes,
+                'monthly_total_incomes_for_each_year': self.monthly_total_incomes_for_each_year
+                }
+
+        return lista
