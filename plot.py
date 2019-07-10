@@ -1,6 +1,8 @@
 from cl import a,months
 import sys
 import pandas as pd
+from Exceptions import month_exception,years_exception 
+from decorators import dec
 
 menu = None
 years = None
@@ -8,29 +10,8 @@ instance = None
 options = {}
 functions_with_no_arguments = ['annual_total_incomes','monthly_total_incomes_for_each_year']
 
-class month_exception(Exception):
-    pass
 
-class years_exception(Exception):
-    pass
 
-def dec(func):
-
-     def inner(*args):
-        while True:
-            try:
-                if not args:
-                    
-                    return func()
-                else:
-                    return func(args[0],args[1])
-            except ValueError:
-                print('You must give a number')
-            except month_exception:
-                print('You must give a Month and the first letter must be upper')
-            except years_exception:
-                print('sfdafads')
-     return inner
 
 
 
@@ -61,12 +42,12 @@ def Input(message:str,flag:int)-> int:
 
 
 
-def exce(kwargs):
+def validate_sys_input(kwargs:dict)->list:
     args = []
     for key,value in kwargs.items():
         key = key.replace('_',' ')
-        value = Input(key,value)
-        args.append(value)
+        validated_input = Input(key,value)
+        args.append(validated_input)
     return args
 
 
@@ -91,7 +72,7 @@ def select_raws_columns(option,dica,a):
         print()
 
 def excecute_option(instance_methods,option,**kwargs):
-    args = exce(kwargs)
+    args = validate_sys_input(kwargs)
     instance_methods[options[option]]([argument for argument in args])
     input('press enter to continue')
     print()
@@ -99,7 +80,7 @@ def excecute_option(instance_methods,option,**kwargs):
 
 
 @dec
-def main(instance_methods,a):
+def select_option(instance_methods,a):
     while True:
             print('These are you option!!!\n')
             print(menou)
@@ -107,16 +88,21 @@ def main(instance_methods,a):
                          
             if options[option] == 'compares_annual_incomes':
                 excecute_option(instance_methods,option,Give_first_year_= 2,Give_second_year_= 2)
+
             elif options[option] == 'specific_month_income_for_specific_year': 
                 excecute_option(instance_methods,option,Give_the_year_= 2,Give_the_month_= 1)
+
             elif options[option] == 'compare_incomes_two_specific_months':
                 excecute_option(instance_methods,option,Give_first_year_=2,Give_first_month_=1,Give_second_year_=2,Give_second_month_=1)
+
             elif options[option] in functions_with_no_arguments: 
                 instance_methods[options[option]]() 
                 input('press enter to continue')
                 print()
+
             elif options[option] == 'month_total_income_for_all_year':
                 select_raws_columns(option,instance_methods,0)
+
             elif options[option] == 'incomes_specific_months_specific_years':
                 select_raws_columns(option,instance_methods,1)
 
@@ -129,7 +115,7 @@ if __name__=='__main__':
     initial_incomes()
     menou = pd.Series(options)
     instance_methods = instance.class_methods()
-    main(instance_methods,None)
+    select_option(instance_methods,None)
 
    
     
