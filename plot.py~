@@ -53,6 +53,7 @@ def validate_sys_input(kwargs:dict)->list:
 def select_raws_columns(option,dica,a):
     raws = []
     if a != 0:
+        print('aaaa')
         number_of_years = Input('Give the number of years you want to see: ',2)
         for index,_ in enumerate([i for i in range(0,number_of_years)]):
             raws.append(Input(f'Give year {index+1}: ',2))

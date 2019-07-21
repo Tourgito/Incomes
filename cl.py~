@@ -4,7 +4,7 @@ import pandas as pd
 plt.close('all')
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-not_show_in_menu = ['plot_etos','gr', 'incomes','annual_income', 'incomes_gen', 'years', 'class_methods']
+
 
 class a(object):
 
