@@ -1,13 +1,12 @@
 from Exceptions import month_exception,years_exception
 
-
-def dec(func):
+#raise errors when user input is wrong
+def Exception_Decorator(func):
 
      def inner(*args):
         while True:
             try:
                 if not args:
-                    
                     return func()
                 else:
                     return func(args[0],args[1])

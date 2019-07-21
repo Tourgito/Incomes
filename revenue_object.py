@@ -4,9 +4,9 @@ import pandas as pd
 plt.close('all')
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+not_show_in_menu = ['plot_etos','gr', 'incomes','annual_income', 'incomes_gen', 'years', 'class_methods']
 
-
-class a(object):
+class revenue(object):
 
     def __init__(self,years:int):
        
@@ -15,12 +15,12 @@ class a(object):
 
    
     
-    def incomes_gen(self):
+    def incomes_gen(self)->list:
       
         for _ in self.years:
             yield from self.annual_income()
 
-    def annual_income(self): 
+    def annual_income(self)->list: 
 
          lista = [] 
          for i in range(1,13):
@@ -116,9 +116,12 @@ class a(object):
         ts = self.incomes.iloc[etos]
         
         ts.plot()
+    
 
+    #return a list with excecutable function of the class
     def class_methods(self)->list:
-        lista = {
+
+        excecutable_ lista = {
                 'incomes_specific_months_specific_years' : self.incomes_specific_months_specific_years,
                 'annual_total_incomes': self.annual_total_incomes,
                 'compare_incomes_two_specific_months' : self.compare_incomes_two_specific_months ,
@@ -130,4 +133,4 @@ class a(object):
                 'monthly_total_incomes_for_each_year': self.monthly_total_incomes_for_each_year
                 }
 
-        return lista
+        return excecutable_lista

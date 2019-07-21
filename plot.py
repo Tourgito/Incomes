@@ -1,8 +1,8 @@
-from cl import a,months,not_show_in_menu
+from revenue_object import revenue,months,not_show_in_menu
 import sys
 import pandas as pd
 from Exceptions import month_exception,years_exception 
-from decorators import dec
+from decorators import Exception_Decorator
 
 menu = None
 years = None
@@ -13,16 +13,18 @@ functions_with_no_arguments = ['annual_total_incomes','monthly_total_incomes_for
 
 
 
-
-@dec
+#create user income 
+@Exception_Decorator
 def initial_incomes():
             global options,instance,years
             years = int(input('Give a number of years for your income: '))
-            instance = a(years)
-            number = 0
-            options = [func for func in (dir(instance)) if not func.startswith('__') and func not in not_show_in_menu]
+            instance = revenue(years)
+            options = [func for func in (dir(instance)) if not func.startswith('__') and func not in not_show_in_menu] # a list with user choices 
 
-@dec
+
+
+#validate user input
+@Exception_Decorator
 def Input(message:str,flag:int)-> int:
     if flag == 0:
         value = int(input(f'{message}'))
@@ -40,7 +42,7 @@ def Input(message:str,flag:int)-> int:
 
 
 
-
+#create the arguments for user choice 
 def validate_sys_input(kwargs:dict)->list:
     args = []
     for key,value in kwargs.items():
@@ -50,9 +52,10 @@ def validate_sys_input(kwargs:dict)->list:
     return args
 
 
-def select_raws_columns(option,dica,a):
+#excecute a range of users available choices and show the results
+def select_raws_columns(option:int,instance_methods:list,selector:int):
     raws = []
-    if a != 0:
+    if selector != 0:
         number_of_years = Input('Give the number of years you want to see: ',2)
         for index,_ in enumerate([i for i in range(0,number_of_years)]):
             raws.append(Input(f'Give year {index+1}: ',2))
@@ -69,16 +72,22 @@ def select_raws_columns(option,dica,a):
         input('press enter to continue')
         print()
 
-def excecute_option(instance_methods,option,**kwargs):
-    args = validate_sys_input(kwargs)
-    instance_methods[options[option]]([argument for argument in args])
+
+
+#excecute a range of users available choices and show the results
+def excecute_option(instance_methods:list,option:int,**kwargs:dict):
+    args = validate_sys_input(kwargs) 
+    instance_methods[options[option]]([argument for argument in args]) #excecute user choice
     input('press enter to continue')
     print()
         
 
 
-@dec
-def select_option(instance_methods,a):
+
+
+#takes users choice and run the appropriate function
+@Exception_Decorator
+def select_option(instance_methods:list,none:None):
     while True:
             print('These are you option!!!\n')
             print(menou)
@@ -112,7 +121,7 @@ if __name__=='__main__':
     
     initial_incomes()
     menou = pd.Series(options)
-    instance_methods = instance.class_methods()
+    instance_methods = instance.class_methods() # a list with excecutable function from revenue object 
     select_option(instance_methods,None)
 
    
