@@ -64,11 +64,11 @@ def select_raws_columns(option:int,instance_methods:list,selector:int):
     for index,_ in enumerate([i for i in range(0,number_of_months)]):
         columns.append(Input(f'Give month {index+1}: ',1))
     if raws:
-        dica[options[option]](raws,columns) 
+        instance_method[options[option]](raws,columns) 
         input('press enter to continue')
         print()
     else:
-        dica[options[option]](columns)
+        instanece_method[options[option]](columns)
         input('press enter to continue')
         print()
 
