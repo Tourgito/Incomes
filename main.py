@@ -1,4 +1,4 @@
-from cl import revenue,months,not_show_in_menu
+from revenue_object  import revenue,months,not_show_in_menu
 import sys
 import pandas as pd
 from Exceptions import month_exception,years_exception 
@@ -20,6 +20,7 @@ def initial_incomes():
             years = int(input('Give a number of years for your income: '))
             instance = revenue(years)
             options = [func for func in (dir(instance)) if not func.startswith('__') and func not in not_show_in_menu] # a list with user choices 
+            options.append('Exit')
 
 
 
@@ -64,11 +65,11 @@ def select_raws_columns(option:int,instance_methods:list,selector:int):
     for index,_ in enumerate([i for i in range(0,number_of_months)]):
         columns.append(Input(f'Give month {index+1}: ',1))
     if raws:
-        instance_method[options[option]](raws,columns) 
+        instance_methods[options[option]](raws,columns) 
         input('press enter to continue')
         print()
     else:
-        instanece_method[options[option]](columns)
+        instance_methods[options[option]](columns)
         input('press enter to continue')
         print()
 
@@ -112,6 +113,16 @@ def select_option(instance_methods:list,none:None):
 
             elif options[option] == 'incomes_specific_months_specific_years':
                 select_raws_columns(option,instance_methods,1)
+
+            elif options[option] == 'incomes':
+                #print(instance.incomes)
+                print()
+                print(instance_methods[options[option]])
+                input('press enter to continue')
+                print()
+
+            elif option == 8:
+                sys.exit()
 
 
 

@@ -4,7 +4,7 @@ import pandas as pd
 plt.close('all')
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-not_show_in_menu = ['plot_etos','gr', 'incomes','annual_income', 'incomes_gen', 'years', 'class_methods']
+not_show_in_menu = ['plot_etos','gr', 'annual_income', 'incomes_gen', 'years', 'class_methods']
 
 class revenue(object):
 
@@ -44,8 +44,10 @@ class revenue(object):
     #args[0] is the first year and args[1] the second
     def compares_annual_incomes(self,args:list):
 
-        print(self.incomes.loc[[args[0],args[1]]])
-        difference =  self.incomes.iloc[args[0]].sum() - self.incomes.iloc[args[1]].sum()
+        print()
+        print(f' The annual income for year {args[0]} is {self.incomes.loc[args[0]].sum()}')
+        print(f' The annual income for year {args[1]} is {self.incomes.loc[args[1]].sum()}')
+        difference =  self.incomes.loc[args[0]].sum() - self.incomes.loc[args[1]].sum()
         if difference < 0:
             difference = abs(difference) 
             print(f'\nThe income of year {args[1]}  is bigger  by {difference}')
@@ -121,7 +123,7 @@ class revenue(object):
     #return a list with excecutable function of the class
     def class_methods(self)->list:
 
-        excecutable_ lista = {
+        excecutable_lista = {
                 'incomes_specific_months_specific_years' : self.incomes_specific_months_specific_years,
                 'annual_total_incomes': self.annual_total_incomes,
                 'compare_incomes_two_specific_months' : self.compare_incomes_two_specific_months ,
@@ -130,7 +132,8 @@ class revenue(object):
 
                 'specific_month_income_for_specific_year' : self.specific_month_income_for_specific_year,
                 'compares_annual_incomes' : self.compares_annual_incomes,
-                'monthly_total_incomes_for_each_year': self.monthly_total_incomes_for_each_year
+                'monthly_total_incomes_for_each_year': self.monthly_total_incomes_for_each_year,
+                'incomes' : self.incomes
                 }
 
         return excecutable_lista
