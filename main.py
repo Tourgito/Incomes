@@ -8,7 +8,7 @@ menu = None
 years = None
 instance = None
 options = {}
-functions_with_no_arguments = ['annual_total_incomes','monthly_total_incomes_for_each_year']
+functions_with_no_arguments = ['annual_total_income_for_each_year','monthly_total_incomes_for_all_years']
 
 
 
@@ -108,7 +108,7 @@ def select_option(instance_methods:list,none:None):
                 input('press enter to continue')
                 print()
 
-            elif options[option] == 'month_total_income_for_all_year':
+            elif options[option] == 'month_total_income_for_all_years':
                 select_raws_columns(option,instance_methods,0)
 
             elif options[option] == 'incomes_specific_months_specific_years':

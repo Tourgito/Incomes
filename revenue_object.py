@@ -33,7 +33,7 @@ class revenue(object):
 
 
     #Shows annual revenue for each year
-    def annual_total_incomes(self):
+    def annual_total_income_for_each_year(self):
       
         Years_revenues = pd.DataFrame(self.incomes.sum(axis=1),columns=['Year revenue'])
         print(Years_revenues)
@@ -59,7 +59,7 @@ class revenue(object):
 
     
     #Show annual revenue for all months for all years
-    def monthly_total_incomes_for_each_year(self):
+    def monthly_total_incomes_for_all_years(self):
 
        Months_revenue = pd.DataFrame(self.incomes.sum(), columns=['Month revenue'])
        print(Months_revenue)
@@ -74,7 +74,7 @@ class revenue(object):
 
     #Show the revenue for specific months for all years
     #col:list has the months
-    def month_total_income_for_all_year(self,col:list):
+    def month_total_income_for_all_years(self,col:list):
 
         Months_revenue = pd.DataFrame(self.incomes.loc[:, [i for i in col]].sum(), columns={'Month revenue'})
         print(Months_revenue)
@@ -125,14 +125,14 @@ class revenue(object):
 
         excecutable_lista = {
                 'incomes_specific_months_specific_years' : self.incomes_specific_months_specific_years,
-                'annual_total_incomes': self.annual_total_incomes,
+                'annual_total_income_for_each_year': self.annual_total_income_for_each_year,
                 'compare_incomes_two_specific_months' : self.compare_incomes_two_specific_months ,
 
-                'month_total_income_for_all_year' : self.month_total_income_for_all_year,
+                'month_total_income_for_all_years' : self.month_total_income_for_all_years,
 
                 'specific_month_income_for_specific_year' : self.specific_month_income_for_specific_year,
                 'compares_annual_incomes' : self.compares_annual_incomes,
-                'monthly_total_incomes_for_each_year': self.monthly_total_incomes_for_each_year,
+                'monthly_total_incomes_for_all_years': self.monthly_total_incomes_for_all_years,
                 'incomes' : self.incomes
                 }
 
